@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.group:hover .transition {
-  display: block;
-}
-
 /* Dropdown Animation */
 .dropdown-enter {
   transform: scale(0.95);

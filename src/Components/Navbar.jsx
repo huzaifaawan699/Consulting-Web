@@ -2,172 +2,216 @@ import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import logo from '../assets/AJ.png';
 
+const DropdownMenu = ({ isOpen, items, closeMenu }) => (
+  <Transition
+    show={isOpen}
+    enter="transition ease-out duration-300"
+    enterFrom="transform opacity-0 scale-95"
+    enterTo="transform opacity-100 scale-100"
+    leave="transition ease-in duration-150"
+    leaveFrom="transform opacity-100 scale-100"
+    leaveTo="transform opacity-0 scale-95"
+    className="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-50"
+  >
+    <div className="py-1">
+      {items.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-500 hover:text-white transition-all duration-200"
+          onClick={closeMenu}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </Transition>
+);
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdown, setDropdown] = useState('');
+  const [dropdown, setDropdown] = useState(null);
 
   const handleDropdown = (name) => {
-    setDropdown(dropdown === name ? '' : name);
+    setDropdown(dropdown === name ? null : name);
   };
 
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+    setDropdown(null);
+  };
+
+  const dropdownItems = {
+    services: [
+      { href: "#service1", label: "Service 1" },
+      { href: "#service2", label: "Service 2" },
+    ],
+    pages: [
+      { href: "#team", label: "Team" },
+      { href: "#pricing", label: "Pricing" },
+      { href: "#faq", label: "FAQ" },
+    ],
+    blog: [
+      { href: "#blog", label: "Blog" },
+      { href: "#single-post", label: "Single Post" },
+    ],
+  };
+
+  const isMobile = window.innerWidth <= 768;
+
   return (
-    <nav className="bg-teal-400 text-white p-4 shadow-2xl">
+    <nav className="bg-teal-500 text-white p-4 shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-30 w-20" />
+          <img src={logo} alt="Logo" className="h-16 w-16" />
         </div>
 
-        {/* Navbar Links (Desktop) */}
+        {/* Navbar Links */}
         <div className="hidden md:flex space-x-12">
-          <a href="#home" className="underline-link hover:text-black">Home</a>
-          <div className="relative">
+          <a href="#home" className="hover:text-gray-200 transition-all duration-200">Home</a>
+          <div
+            className="relative"
+            onMouseEnter={() => !isMobile && setDropdown('services')}
+            onMouseLeave={() => !isMobile && setDropdown(null)}
+          >
             <button
-              onClick={() => handleDropdown('services')}
-              className="hover:text-black focus:outline-none"
+              onClick={() => isMobile && handleDropdown('services')}
+              className="hover:text-gray-200 transition-all duration-200 focus:outline-none"
             >
               Services
             </button>
-            <Transition
-              show={dropdown === 'services'}
-              enter="transition ease-out duration-200"
-              enterFrom="transform scale-95 opacity-0"
-              enterTo="transform scale-100 opacity-100"
-              leave="transition ease-in duration-150"
-              leaveFrom="transform scale-100 opacity-100"
-              leaveTo="transform scale-95 opacity-0"
-              className="absolute mt-2 w-48 bg-teal-300 rounded-md shadow-lg"
-            >
-              <div className="py-1">
-                <a href="#service1" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">Service 1</a>
-                <a href="#service2" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">Service 2</a>
-              </div>
-            </Transition>
+            <DropdownMenu
+              isOpen={dropdown === 'services'}
+              items={dropdownItems.services}
+              closeMenu={closeMobileMenu}
+            />
           </div>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => !isMobile && setDropdown('pages')}
+            onMouseLeave={() => !isMobile && setDropdown(null)}
+          >
             <button
-              onClick={() => handleDropdown('pages')}
-              className="hover:text-black focus:outline-none"
+              onClick={() => isMobile && handleDropdown('pages')}
+              className="hover:text-gray-200 transition-all duration-200 focus:outline-none"
             >
               Pages
             </button>
-            <Transition
-              show={dropdown === 'pages'}
-              enter="transition ease-out duration-200"
-              enterFrom="transform scale-95 opacity-0"
-              enterTo="transform scale-100 opacity-100"
-              leave="transition ease-in duration-150"
-              leaveFrom="transform scale-100 opacity-100"
-              leaveTo="transform scale-95 opacity-0"
-              className="absolute mt-2 w-48 bg-teal-300 rounded-md shadow-lg"
-            >
-              <div className="py-1">
-                <a href="#team" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">Team</a>
-                <a href="#pricing" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">Pricing</a>
-                <a href="#faq" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">FAQ</a>
-              </div>
-            </Transition>
+            <DropdownMenu
+              isOpen={dropdown === 'pages'}
+              items={dropdownItems.pages}
+              closeMenu={closeMobileMenu}
+            />
           </div>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => !isMobile && setDropdown('blog')}
+            onMouseLeave={() => !isMobile && setDropdown(null)}
+          >
             <button
-              onClick={() => handleDropdown('blog')}
-              className="hover:text-black focus:outline-none"
+              onClick={() => isMobile && handleDropdown('blog')}
+              className="hover:text-gray-200 transition-all duration-200 focus:outline-none"
             >
               Blog
             </button>
-            <Transition
-              show={dropdown === 'blog'}
-              enter="transition ease-out duration-200"
-              enterFrom="transform scale-95 opacity-0"
-              enterTo="transform scale-100 opacity-100"
-              leave="transition ease-in duration-150"
-              leaveFrom="transform scale-100 opacity-100"
-              leaveTo="transform scale-95 opacity-0"
-              className="absolute mt-2 w-48 bg-teal-300 rounded-md shadow-lg"
-            >
-              <div className="py-1">
-                <a href="#blog" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">Blog</a>
-                <a href="#single-post" className="block px-4 py-2 text-sm hover:bg-teal-200 transition-opacity duration-300">Single Post</a>
-              </div>
-            </Transition>
+            <DropdownMenu
+              isOpen={dropdown === 'blog'}
+              items={dropdownItems.blog}
+              closeMenu={closeMobileMenu}
+            />
           </div>
-          <a href="#about" className="underline-link hover:text-black">About</a>
-          <a href="#contact" className="underline-link hover:text-black">Contact Us</a>
+          <a href="#about" className="hover:text-gray-200 transition-all duration-200">About</a>
+          <a href="#contact" className="hover:text-gray-200 transition-all duration-200">Contact Us</a>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-black focus:outline-none"
+            className="text-white focus:outline-none"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
         </div>
-      </div>
 
-      {/* Mobile Full-Screen Slide Menu */}
-      <Transition
-        show={isOpen}
-        enter="transition-transform ease-in-out duration-300"
-        enterFrom="transform translate-x-full opacity-0"
-        enterTo="transform translate-x-0 opacity-100"
-        leave="transition-transform ease-in-out duration-200"
-        leaveFrom="transform translate-x-0 opacity-100"
-        leaveTo="transform translate-x-full opacity-0"
-        className="fixed inset-0 z-40 bg-teal-400 flex flex-col items-center justify-center"
-      >
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute top-4 right-4 text-white text-2xl focus:outline-none"
-        >
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-        <a href="#home" className="text-xl text-white hover:text-black transition-opacity duration-300">Home</a>
-        <button
-          onClick={() => handleDropdown('services')}
-          className="text-xl text-white hover:text-black transition-opacity duration-300"
-        >
-          Services
-        </button>
-        {dropdown === 'services' && (
-          <div className="space-y-4 mt-4">
-            <a href="#service1" className="block text-lg hover:text-black transition-opacity duration-300">Service 1</a>
-            <a href="#service2" className="block text-lg hover:text-black transition-opacity duration-300">Service 2</a>
-          </div>
+        {/* Mobile Menu Overlay */}
+        {isOpen && (
+          <div
+            onClick={closeMobileMenu}
+            className="fixed inset-0 bg-black opacity-50 z-40"
+          ></div>
         )}
-        <button
-          onClick={() => handleDropdown('pages')}
-          className="text-xl text-white hover:text-black transition-opacity duration-300"
+
+        {/* Mobile Menu */}
+        <Transition
+          show={isOpen}
+          enter="transition-transform duration-500 ease-in-out"
+          enterFrom="transform -translate-y-full"
+          enterTo="transform translate-y-0"
+          leave="transition-transform duration-500 ease-in-out"
+          leaveFrom="transform translate-y-0"
+          leaveTo="transform -translate-y-full"
+          className="fixed top-0 left-0 w-full sm:w-64 bg-white text-black z-50 h-full shadow-xl overflow-auto"
         >
-          Pages
-        </button>
-        {dropdown === 'pages' && (
-          <div className="space-y-4 mt-4">
-            <a href="#team" className="block text-lg hover:text-black transition-opacity duration-300">Team</a>
-            <a href="#pricing" className="block text-lg hover:text-black transition-opacity duration-300">Pricing</a>
-            <a href="#faq" className="block text-lg hover:text-black transition-opacity duration-300">FAQ</a>
+          <div className="relative p-6">
+            <button
+              onClick={closeMobileMenu}
+              className="absolute top-4 right-4 text-black"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+            <div className="space-y-4">
+              <a href="#home" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Home</a>
+              <div className="relative">
+                <button
+                  onClick={() => handleDropdown('mobile-services')}
+                  className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200 transition-all duration-200"
+                >
+                  Services
+                </button>
+                <DropdownMenu
+                  isOpen={dropdown === 'mobile-services'}
+                  items={dropdownItems.services}
+                  closeMenu={closeMobileMenu}
+                />
+              </div>
+              <div className="relative">
+                <button
+                  onClick={() => handleDropdown('mobile-pages')}
+                  className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200 transition-all duration-200"
+                >
+                  Pages
+                </button>
+                <DropdownMenu
+                  isOpen={dropdown === 'mobile-pages'}
+                  items={dropdownItems.pages}
+                  closeMenu={closeMobileMenu}
+                />
+              </div>
+              <div className="relative">
+                <button
+                  onClick={() => handleDropdown('mobile-blog')}
+                  className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200 transition-all duration-200"
+                >
+                  Blog
+                </button>
+                <DropdownMenu
+                  isOpen={dropdown === 'mobile-blog'}
+                  items={dropdownItems.blog}
+                  closeMenu={closeMobileMenu}
+                />
+              </div>
+              <a href="#about" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>About</a>
+              <a href="#contact" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Contact Us</a>
+            </div>
           </div>
-        )}
-        <button
-          onClick={() => handleDropdown('blog')}
-          className="text-xl text-white hover:text-black transition-opacity duration-300"
-        >
-          Blog
-        </button>
-        {dropdown === 'blog' && (
-          <div className="space-y-4 mt-4">
-            <a href="#blog" className="block text-lg hover:text-black transition-opacity duration-300">Blog</a>
-            <a href="#single-post" className="block text-lg hover:text-black transition-opacity duration-300">Single Post</a>
-          </div>
-        )}
-        <a href="#about" className="text-xl text-white hover:text-black transition-opacity duration-300">About</a>
-        <a href="#contact" className="text-xl text-white hover:text-black transition-opacity duration-300">Contact Us</a>
-      </Transition>
+        </Transition>
+      </div>
     </nav>
   );
 };
