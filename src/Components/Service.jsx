@@ -38,7 +38,7 @@ const Service = () => {
   };
 
   return (
-    <div className="w-full px-4 md:px-8 lg:px-16 mt-8" ref={sliderRef} id='services'>
+    <div className="w-full px-4 md:px-8 lg:px-16 mt-8 bg-teal-200" ref={sliderRef} id='services'>
       <Slider {...settings} className="relative">
         {sliderData.map((slide, index) => (
           <div key={index} className="p-4 md:p-6 flex flex-col items-center relative overflow-hidden group">

@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import Service from './Components/Service';
+import Team from './Components/Team';
 
 
 
@@ -13,6 +14,7 @@ function App() {
       <Navbar/>
       <Home/>
       <Service/>
+      <Team/>
     </>
   );
 }
