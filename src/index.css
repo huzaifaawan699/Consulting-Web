@@ -69,3 +69,230 @@
   width: 100%;
   background-color: #000000;
 }
+/* styles.css or in a <style> block in your main HTML file */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-animation {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.stagger-animation:nth-child(1) {
+  animation-delay: 0s;
+}
+.stagger-animation:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-animation:nth-child(3) {
+  animation-delay: 0.4s;
+}
+/* index.css */
+
+/* Keyframes for fade-up animation */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation classes with delay */
+.fade-up {
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
+.delay-0 {
+  animation-delay: 0ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Transition for hover effect */
+.card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.purchase-button {
+  transition: transform 0.3s ease-in-out;
+}
+
+.purchase-button:hover {
+  transform: scale(1.1);
+}
+/* index.css */
+
+/* Keyframes for scale and opacity transition */
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+    background-color: #ffffff;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05);
+    background-color: #0000; /* Transparent */
+    opacity: 0.9;
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    transform: scale(1.05);
+    background-color: #0000; /* Transparent */
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    background-color: #ffffff;
+    opacity: 1;
+  }
+}
+
+.card {
+  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+}
+
+.card:hover {
+  animation: scaleUp 0.5s forwards;
+}
+
+.card:not(:hover) {
+  animation: scaleDown 0.5s forwards;
+}
+/* index.css */
+
+/* Keyframes for fade-in and slide-up animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply the animation to the element */
+.fade-in-up {
+  animation: fadeInUp 1s ease-out;
+}
+/* index.css or tailwind.css */
+
+/* Keyframes for fade-in-left and zoom-in animations */
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Applying the animations */
+.animate-fade-in-left {
+  animation: fadeInLeft 1.5s ease-out;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 1.5s ease-out;
+}
+/* index.css or tailwind.css */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+/* For the image zoom effect */
+.zoom-enter {
+  transform: scale(1.1);
+  opacity: 0;
+}
+.zoom-enter-active {
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  transform: scale(1);
+  opacity: 1;
+}
+.zoom-exit {
+  transform: scale(1);
+  opacity: 1;
+}
+.zoom-exit-active {
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+/* For the text slide and fade effect */
+.slide-fade-enter {
+  transform: translateY(10px);
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  transform: translateY(0);
+  opacity: 1;
+}
+.slide-fade-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+.slide-fade-exit-active {
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  transform: translateY(10px);
+  opacity: 0;
+}

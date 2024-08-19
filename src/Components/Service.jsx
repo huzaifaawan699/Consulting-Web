@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { memo } from 'react';
 import Slider from 'react-slick';
-import { gsap } from 'gsap';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Marketing from '../assets/Marketing.jpg';
@@ -15,17 +14,6 @@ const sliderData = [
 ];
 
 const Service = () => {
-  const sliderRef = useRef(null);
-
-  useEffect(() => {
-    // GSAP slider animation
-    gsap.fromTo(
-      sliderRef.current,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
-    );
-  }, []);
-
   const settings = {
     dots: false,
     infinite: true,
@@ -38,14 +26,14 @@ const Service = () => {
   };
 
   return (
-    <div className="w-full px-4 md:px-8 lg:px-16 mt-8 bg-teal-200" ref={sliderRef} id='services'>
-      <Slider {...settings} className="relative">
+    <div className="w-full px-4 md:px-8 lg:px-16 mt-8 bg-teal-200" id='services'>
+      <Slider {...settings} className="relative fade-in-up">
         {sliderData.map((slide, index) => (
           <div key={index} className="p-4 md:p-6 flex flex-col items-center relative overflow-hidden group">
             <img
               src={slide.imgSrc}
               alt={slide.title}
-              className="w-full h-[60vh] object-cover rounded-lg transition-transform duration-500 ease-in-out transform group-hover:scale-105 lazyload"
+              className="w-full h-[60vh] object-cover rounded-lg transition-transform duration-500 ease-in-out transform group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-black p-8">

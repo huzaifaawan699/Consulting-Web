@@ -48,7 +48,6 @@ const Navbar = () => {
       { href: "#faq", label: "FAQ" },
     ],
     blog: [
-      { href: "#blog", label: "Blog" },
       { href: "#single-post", label: "Single Post" },
     ],
   };
