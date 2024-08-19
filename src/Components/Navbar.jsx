@@ -42,10 +42,6 @@ const Navbar = () => {
   };
 
   const dropdownItems = {
-    services: [
-      { href: "#service1", label: "Service 1" },
-      { href: "#service2", label: "Service 2" },
-    ],
     pages: [
       { href: "#team", label: "Team" },
       { href: "#pricing", label: "Pricing" },
@@ -60,7 +56,7 @@ const Navbar = () => {
   const isMobile = window.innerWidth <= 768;
 
   return (
-    <nav className="bg-teal-500 text-white p-4 shadow-lg">
+    <nav className="bg-teal-500 text-white p-4">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
@@ -70,23 +66,7 @@ const Navbar = () => {
         {/* Navbar Links */}
         <div className="hidden md:flex space-x-12">
           <a href="#home" className="hover:text-gray-200 transition-all duration-200">Home</a>
-          <div
-            className="relative"
-            onMouseEnter={() => !isMobile && setDropdown('services')}
-            onMouseLeave={() => !isMobile && setDropdown(null)}
-          >
-            <button
-              onClick={() => isMobile && handleDropdown('services')}
-              className="hover:text-gray-200 transition-all duration-200 focus:outline-none"
-            >
-              Services
-            </button>
-            <DropdownMenu
-              isOpen={dropdown === 'services'}
-              items={dropdownItems.services}
-              closeMenu={closeMobileMenu}
-            />
-          </div>
+          <a href="#services" className="hover:text-gray-200 transition-all duration-200">Services</a>
           <div
             className="relative"
             onMouseEnter={() => !isMobile && setDropdown('pages')}
@@ -148,13 +128,13 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <Transition
           show={isOpen}
-          enter="transition-transform duration-500 ease-in-out"
-          enterFrom="transform -translate-y-full"
-          enterTo="transform translate-y-0"
-          leave="transition-transform duration-500 ease-in-out"
-          leaveFrom="transform translate-y-0"
-          leaveTo="transform -translate-y-full"
-          className="fixed top-0 left-0 w-full sm:w-64 bg-white text-black z-50 h-full shadow-xl overflow-auto"
+          enter="transition-transform transform ease-in-out duration-300"
+          enterFrom="transform -translate-y-full scale-90 opacity-0"
+          enterTo="transform translate-y-0 scale-100 opacity-100"
+          leave="transition-transform transform ease-in-out duration-300"
+          leaveFrom="transform translate-y-0 scale-100 opacity-100"
+          leaveTo="transform -translate-y-full scale-90 opacity-0"
+          className="fixed top-0 left-0 w-full sm:w-64 bg-white text-black z-50 h-full shadow-2xl overflow-auto"
         >
           <div className="relative p-6">
             <button
@@ -165,21 +145,13 @@ const Navbar = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
+            {/* Logo in Mobile Menu */}
+            <div className="flex justify-center mb-6">
+              <img src={logo} alt="Logo" className="h-16 w-16" />
+            </div>
             <div className="space-y-4">
               <a href="#home" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Home</a>
-              <div className="relative">
-                <button
-                  onClick={() => handleDropdown('mobile-services')}
-                  className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200 transition-all duration-200"
-                >
-                  Services
-                </button>
-                <DropdownMenu
-                  isOpen={dropdown === 'mobile-services'}
-                  items={dropdownItems.services}
-                  closeMenu={closeMobileMenu}
-                />
-              </div>
+              <a href="#services" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Services</a>
               <div className="relative">
                 <button
                   onClick={() => handleDropdown('mobile-pages')}
