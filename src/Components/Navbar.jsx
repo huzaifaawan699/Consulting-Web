@@ -1,31 +1,23 @@
 import React, { useState } from 'react';
-import { Transition } from '@headlessui/react';
 import logo from '../assets/AJ.png';
 
 const DropdownMenu = ({ isOpen, items, closeMenu }) => (
-  <Transition
-    show={isOpen}
-    enter="transition ease-out duration-300"
-    enterFrom="transform opacity-0 scale-95"
-    enterTo="transform opacity-100 scale-100"
-    leave="transition ease-in duration-150"
-    leaveFrom="transform opacity-100 scale-100"
-    leaveTo="transform opacity-0 scale-95"
-    className="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-50"
-  >
-    <div className="py-1">
-      {items.map((item) => (
-        <a
-          key={item.href}
-          href={item.href}
-          className="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-500 hover:text-white transition-all duration-200"
-          onClick={closeMenu}
-        >
-          {item.label}
-        </a>
-      ))}
+  isOpen && (
+    <div className="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+      <div className="py-1">
+        {items.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-500 hover:text-white"
+            onClick={closeMenu}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
     </div>
-  </Transition>
+  )
 );
 
 const Navbar = () => {
@@ -55,7 +47,7 @@ const Navbar = () => {
   const isMobile = window.innerWidth <= 768;
 
   return (
-    <nav className="bg-teal-500 text-white p-4">
+    <nav className="bg-teal-500 text-black p-4">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
@@ -64,18 +56,28 @@ const Navbar = () => {
 
         {/* Navbar Links */}
         <div className="hidden md:flex space-x-12">
-          <a href="#home" className="hover:text-gray-200 transition-all duration-200">Home</a>
-          <a href="#services" className="hover:text-gray-200 transition-all duration-200">Services</a>
+          <a href="#home" className="hover:text-white relative">
+            <span className="hover:underline transition-all duration-200 after:content-[''] after:block after:w-full after:h-1 after:bg-white after:absolute after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+              Home
+            </span>
+          </a>
+          <a href="#services" className="hover:text-white relative">
+            <span className="hover:underline transition-all duration-200 after:content-[''] after:block after:w-full after:h-1 after:bg-white after:absolute after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+              Services
+            </span>
+          </a>
           <div
-            className="relative"
+            className="relative group"
             onMouseEnter={() => !isMobile && setDropdown('pages')}
             onMouseLeave={() => !isMobile && setDropdown(null)}
           >
             <button
               onClick={() => isMobile && handleDropdown('pages')}
-              className="hover:text-gray-200 transition-all duration-200 focus:outline-none"
+              className="hover:text-white transition-all duration-200 focus:outline-none relative"
             >
-              Pages
+              <span className="hover:underline after:content-[''] after:block after:w-full after:h-1 after:bg-white after:absolute after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+                Pages
+              </span>
             </button>
             <DropdownMenu
               isOpen={dropdown === 'pages'}
@@ -84,15 +86,17 @@ const Navbar = () => {
             />
           </div>
           <div
-            className="relative"
+            className="relative group"
             onMouseEnter={() => !isMobile && setDropdown('blog')}
             onMouseLeave={() => !isMobile && setDropdown(null)}
           >
             <button
               onClick={() => isMobile && handleDropdown('blog')}
-              className="hover:text-gray-200 transition-all duration-200 focus:outline-none"
+              className="hover:text-white transition-all duration-200 focus:outline-none relative"
             >
-              Blog
+              <span className="hover:underline after:content-[''] after:block after:w-full after:h-1 after:bg-white after:absolute after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+                Blog
+              </span>
             </button>
             <DropdownMenu
               isOpen={dropdown === 'blog'}
@@ -100,8 +104,16 @@ const Navbar = () => {
               closeMenu={closeMobileMenu}
             />
           </div>
-          <a href="#about" className="hover:text-gray-200 transition-all duration-200">About</a>
-          <a href="#contact" className="hover:text-gray-200 transition-all duration-200">Contact Us</a>
+          <a href="#about" className="hover:text-white relative">
+            <span className="hover:underline transition-all duration-200 after:content-[''] after:block after:w-full after:h-1 after:bg-white after:absolute after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+              About
+            </span>
+          </a>
+          <a href="#contact" className="hover:text-white relative">
+            <span className="hover:underline transition-all duration-200 after:content-[''] after:block after:w-full after:h-1 after:bg-white after:absolute after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+              Contact Us
+            </span>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -125,63 +137,56 @@ const Navbar = () => {
         )}
 
         {/* Mobile Menu */}
-        <Transition
-          show={isOpen}
-          enter="transition-transform transform ease-in-out duration-300"
-          enterFrom="transform -translate-y-full scale-90 opacity-0"
-          enterTo="transform translate-y-0 scale-100 opacity-100"
-          leave="transition-transform transform ease-in-out duration-300"
-          leaveFrom="transform translate-y-0 scale-100 opacity-100"
-          leaveTo="transform -translate-y-full scale-90 opacity-0"
-          className="fixed top-0 left-0 w-full sm:w-64 bg-white text-black z-50 h-full shadow-2xl overflow-auto"
-        >
-          <div className="relative p-6">
-            <button
-              onClick={closeMobileMenu}
-              className="absolute top-4 right-4 text-black"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-            {/* Logo in Mobile Menu */}
-            <div className="flex justify-center mb-6">
-              <img src={logo} alt="Logo" className="h-16 w-16" />
-            </div>
-            <div className="space-y-4">
-              <a href="#home" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Home</a>
-              <a href="#services" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Services</a>
-              <div className="relative">
-                <button
-                  onClick={() => handleDropdown('mobile-pages')}
-                  className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200 transition-all duration-200"
-                >
-                  Pages
-                </button>
-                <DropdownMenu
-                  isOpen={dropdown === 'mobile-pages'}
-                  items={dropdownItems.pages}
-                  closeMenu={closeMobileMenu}
-                />
+        {isOpen && (
+          <div className="fixed top-0 left-0 w-full sm:w-64 bg-teal-300 text-black z-50 h-full shadow-2xl overflow-auto">
+            <div className="relative p-6">
+              <button
+                onClick={closeMobileMenu}
+                className="absolute top-4 right-4 text-black"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+              {/* Logo in Mobile Menu */}
+              <div className="flex justify-center mb-6">
+                <img src={logo} alt="Logo" className="h-16 w-16" />
               </div>
-              <div className="relative">
-                <button
-                  onClick={() => handleDropdown('mobile-blog')}
-                  className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200 transition-all duration-200"
-                >
-                  Blog
-                </button>
-                <DropdownMenu
-                  isOpen={dropdown === 'mobile-blog'}
-                  items={dropdownItems.blog}
-                  closeMenu={closeMobileMenu}
-                />
+              <div className="space-y-4">
+                <a href="#home" className="block text-lg text-gray-800 hover:bg-teal-200" onClick={closeMobileMenu}>Home</a>
+                <a href="#services" className="block text-lg text-gray-800 hover:bg-teal-200" onClick={closeMobileMenu}>Services</a>
+                <div className="relative group">
+                  <button
+                    onClick={() => handleDropdown('mobile-pages')}
+                    className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200"
+                  >
+                    Pages
+                  </button>
+                  <DropdownMenu
+                    isOpen={dropdown === 'mobile-pages'}
+                    items={dropdownItems.pages}
+                    closeMenu={closeMobileMenu}
+                  />
+                </div>
+                <div className="relative group">
+                  <button
+                    onClick={() => handleDropdown('mobile-blog')}
+                    className="block text-lg text-gray-800 w-full text-left hover:bg-teal-200"
+                  >
+                    Blog
+                  </button>
+                  <DropdownMenu
+                    isOpen={dropdown === 'mobile-blog'}
+                    items={dropdownItems.blog}
+                    closeMenu={closeMobileMenu}
+                  />
+                </div>
+                <a href="#about" className="block text-lg text-gray-800 hover:bg-teal-200" onClick={closeMobileMenu}>About</a>
+                <a href="#contact" className="block text-lg text-gray-800 hover:bg-teal-200" onClick={closeMobileMenu}>Contact Us</a>
               </div>
-              <a href="#about" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>About</a>
-              <a href="#contact" className="block text-lg text-gray-800 hover:bg-teal-200 transition-all duration-200" onClick={closeMobileMenu}>Contact Us</a>
             </div>
           </div>
-        </Transition>
+        )}
       </div>
     </nav>
   );
