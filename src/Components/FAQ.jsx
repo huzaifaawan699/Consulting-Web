@@ -27,27 +27,27 @@ const FAQ = () => {
   };
 
   return (
-    <div className="p-8 bg-teal-200" id="faq">
+    <div className="p-8 bg-white" id="faq">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Frequently Asked Questions</h1>
-        <p className="text-lg text-gray-600 mt-2">Find answers to some of the most common questions we receive.</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-black">Frequently Asked Questions</h1>
+        <p className="text-lg text-black mt-2">Find answers to some of the most common questions we receive.</p>
       </div>
       <div className="max-w-3xl mx-auto">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="mb-4 border-b border-gray-300"
+            className="mb-4 border-b border-gray-700"
           >
             <button
-              className="w-full text-left p-4 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none"
+              className="w-full text-left p-4 bg-gray-800 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none"
               onClick={() => toggleAnswer(index)}
             >
-              <h2 className="text-xl font-semibold text-gray-800">{faq.question}</h2>
+              <h2 className="text-xl font-semibold text-white">{faq.question}</h2>
             </button>
             <div
               className={`overflow-hidden transition-max-height duration-500 ease-in-out ${activeIndex === index ? 'max-h-40' : 'max-h-0'}`}
             >
-              <p className="p-4 text-gray-600">{faq.answer}</p>
+              <p className="p-4 text-black">{faq.answer}</p>
             </div>
           </div>
         ))}

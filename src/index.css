@@ -296,3 +296,62 @@
   transform: translateY(10px);
   opacity: 0;
 }
+/* Add this to your global CSS file or in a <style> tag */
+@keyframes tick-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tick {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.tick::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #4caf50;
+  top: 50%;
+  left: 20%;
+  transform: rotate(45deg);
+  transform-origin: left center;
+  animation: tick-animation 0.6s ease-out;
+}
+
+.tick::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #4caf50;
+  top: 50%;
+  left: 0;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+  animation: tick-animation 0.6s ease-out;
+}
+/* Optional CSS for slider transitions and positioning */
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+body {
+  background-color: #000000;
+}

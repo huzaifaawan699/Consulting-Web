@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Footer = () => {
+  const [showTick, setShowTick] = useState(true);
+
   return (
     <footer className="bg-gray-800 text-gray-300 py-12">
       <div className="container mx-auto px-4">
@@ -82,6 +84,9 @@ const Footer = () => {
           <p className="text-gray-400">
             &copy; {new Date().getFullYear()} Your Company. All rights reserved.
           </p>
+          {showTick && (
+            <div className="tick mt-4"></div>
+          )}
         </div>
       </div>
     </footer>

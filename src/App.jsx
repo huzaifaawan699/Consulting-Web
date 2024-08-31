@@ -8,6 +8,8 @@ import FAQ from './Components/FAQ';
 import Blog from './Components/Blog';
 import Footer from './Components/Footer';
 import Contact from './Components/Contact';
+import Stats from './Components/Stats';
+import Quotes from './Components/Quotes';
 
 
 function App() {
@@ -19,10 +21,12 @@ function App() {
       <Home/>
       <Service/>
       <Team/>
+      <Quotes/>
       <Pricing/>
+      <Stats/>
+      <Blog/> 
       <Contact/>
       <FAQ/>
-      <Blog/>
       <Footer/>
      
     </>
