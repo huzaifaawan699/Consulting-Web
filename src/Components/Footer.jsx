@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 
 const Footer = () => {
   const [showTick, setShowTick] = useState(true);
+  const [animateTick, setAnimateTick] = useState(false);
+
+  // Handle tick click
+  const handleTickClick = () => {
+    setAnimateTick(true);
+    setTimeout(() => {
+      window.location.href = '/'; // Navigate to home page after animation
+    }, 500); // Match the timeout with animation duration
+  };
 
   return (
     <footer className="bg-gray-800 text-gray-300 py-12">
@@ -14,16 +23,16 @@ const Footer = () => {
               We provide innovative solutions and exceptional services. Discover our offerings and join us in making a difference.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-teal-400 hover:text-teal-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="text-teal-400 hover:text-teal-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#" className="text-teal-400 hover:text-teal-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="#" className="text-teal-400 hover:text-teal-600">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
@@ -85,7 +94,12 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Your Company. All rights reserved.
           </p>
           {showTick && (
-            <div className="tick mt-4"></div>
+            <div
+              className={`tick mt-4 w-10 h-10 bg-gray-600 text-white flex items-center justify-center rounded-full cursor-pointer ${animateTick ? 'animate-slide-up' : ''}`}
+              onClick={handleTickClick}
+            >
+              <i className="fas fa-check"></i>
+            </div>
           )}
         </div>
       </div>

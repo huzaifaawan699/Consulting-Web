@@ -25,7 +25,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen p-0">
+    <div className="relative flex items-center justify-center min-h-screen p-0 overflow-hidden">
       {/* Slider */}
       <div className="relative w-full h-screen overflow-hidden">
         <div
@@ -43,9 +43,9 @@ const Home = () => {
         <div className="absolute inset-0 bg-black opacity-50"></div>
 
         {/* Content Wrapper */}
-        <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2">
+        <div className="absolute inset-0 flex items-center justify-center md:justify-start p-4">
           {/* Content */}
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-md md:w-1/2 lg:w-1/3 animate-slide-in text-center md:text-left">
             <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold text-white mb-4">
               Elevate Your Business with Our Consulting Services
             </h1>
