@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/AJ6.png';
+import logo from '../assets/logos.jpg';
 
 const DropdownMenu = ({ isOpen, items, closeMenu }) => (
   isOpen && (
@@ -51,7 +51,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-14 w-15" />
+          <img src={logo} alt="Logo" className="h-16 w-17" />
         </div>
 
         {/* Navbar Links */}
